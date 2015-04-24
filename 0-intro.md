@@ -4,7 +4,7 @@
 
 &nbsp;
 
-Osvaldas Grigas | [@grigas](http://twitter.com/ogrigas)
+Osvaldas Grigas | [@ogrigas](http://twitter.com/ogrigas)
 
 ---
 
