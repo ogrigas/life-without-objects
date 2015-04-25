@@ -68,8 +68,10 @@ public class JsonList implements JsonObj {
     
     public String toJson() {
         return "[" +
-            list.stream().map(JsonObj::toJson).collect(joining(","))
-            + "]";
+            list.stream()
+                .map(JsonObj::toJson)
+                .collect(joining(",")) +
+            "]";
     }
 }
 ```
@@ -127,7 +129,7 @@ Too constraining!
 ```clojure
 (extend-type List Json
   (to-json [this]
-    (str "[" (string/join "," (map to-json this)) "]"])))
+    (str "[" (->> this (map to-json) (string/join ",")) "]")))
 ```
 
 ```clojure

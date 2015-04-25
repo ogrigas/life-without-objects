@@ -17,19 +17,19 @@ Avoiding hard-coded dependencies
 ```java
 public class ProfilePage {
 
-    public String render(CustomerRepository repository, int customerId) {
+    public String render(Repository repository, int customerId) {
         return toHtml(repository.loadProfile(customerId));
     }
 }
 ```
 
 ```java
-CustomerRepository repository = new CustomerRepository();
-ProfilePage profilePage = new ProfilePage();
+Repository repository = new Repository();
+ProfilePage page = new ProfilePage();
 ```
 
 ```java
-String html = profilePage.render(repository, customerId);
+String html = page.render(repository, customerId);
 ```
 
 ---
@@ -37,7 +37,7 @@ String html = profilePage.render(repository, customerId);
 ### FP Composition
 
 ```clojure
-(defn render-profile-page [repository-fn customer-id]
+(defn render-page [repository-fn customer-id]
   (to-html (repository-fn customer-id)))
 ```
 
@@ -47,7 +47,7 @@ String html = profilePage.render(repository, customerId);
 ```
 
 ```clojure
-(render-profile-page load-profile customer-id)
+(render-page load-profile customer-id)
 ```
 
 ---
@@ -55,7 +55,7 @@ String html = profilePage.render(repository, customerId);
 ### OO "Dependency Injection"
 
 ```java
-ProfilePage pageInjected = new ProfilePage(new CustomerRepository());
+ProfilePage pageInjected = new ProfilePage(new Repository());
 ```
 
 ```java
@@ -68,7 +68,7 @@ pageInjected.render(customerId);
 
 ```clojure
 (def render-injected
-  (fn [customer-id] (render-profile-page load-profile customer-id)))
+  (fn [customer-id] (render-page load-profile customer-id)))
 ```
 
 ```clojure
@@ -80,9 +80,10 @@ pageInjected.render(customerId);
 ### Partial application
 
 ```clojure
-(def render-injected (partial render-profile-page load-profile))
+(def render-injected (partial render-page load-profile))
 ```
 
 ```clojure
 (render-injected customer-id)
 ```
+
