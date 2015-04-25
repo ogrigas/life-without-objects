@@ -208,9 +208,15 @@ Feelin' good now
 ```
 
 ```clojure
-(import '[my.product.repository :as product-repo])
+(require '[my.product.repository :as product-repo])
 
 (product-repo/find-by-id 42)
+```
+
+```clojure
+(require '[my.product.repository :refer [find-by-id]])
+
+(find-by-id 42)
 ```
 
 ---
