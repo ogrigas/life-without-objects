@@ -8,16 +8,16 @@
 
 ### Polymorphism
 
-- Subtype
-- Parametric
-- Ad-hoc
+I don't know.  
+I don't want to know.
 
 ---
 
 ### Polymorphism
 
-I don't know.  
-I don't want to know.
+- Subtype
+- Parametric
+- Ad-hoc
 
 ---
 

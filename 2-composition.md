@@ -87,3 +87,33 @@ pageInjected.render(customerId);
 (render-injected customer-id)
 ```
 
+---
+
+### "Adapter" pattern
+
+```clojure
+(defn parse-int [s] (Integer/parseInt s))
+
+(render-page (comp load-profile parse-int) customer-id)
+```
+
+```clojure
+(defn to-view-model [profile] (...))
+
+(render-page (comp to-view-model load-profile) customer-id)
+```
+
+---
+
+### "Decorator" pattern
+
+```clojure
+(defn with-timer [f]
+  (fn [& args]
+    (println "Started" (System/nanoTime)
+    (apply f args)
+    (println "Completed" (System/nanoTime))))
+
+(render-page (with-timer load-profile) customer-id)
+```
+
