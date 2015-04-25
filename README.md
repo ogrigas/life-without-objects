@@ -6,7 +6,9 @@ reveal.js based slides of my presentation on moving from OOP to functional progr
 - FP composition
 - FP polymorphism
 
-To view it in a browser:
+You may [view presentation online](http://ogrigas.github.io/living-without-objects)
+
+...or offline: 
 
 ```
 git clone https://github.com/ogrigas/living-without-objects.git
