@@ -15,7 +15,7 @@ I don't want to know.
 
 ### Polymorphism
 
-- Subtype
+- **Subtype**
 - Parametric
 - Ad-hoc
 
@@ -25,12 +25,7 @@ I don't want to know.
 
 - Inheritance hierarchy
 - Interfaces
-
----
-
-### Dependency inversion
-
-("Strategy" interfaces)
+- Dependency inversion
 
 ---
 
@@ -80,12 +75,14 @@ public class JsonList implements JsonObj {
 
 
 ```java
-JsonObj obj = new JsonList(
+JsonObj obj = new JsonList(asList(
       new JsonString("a"),
-    new JsonList(
+    new JsonList(asList(
         new JsonString("b"),
-        new JsonString("c")),
-    new JsonString("d"));
+        new JsonString("c")
+    )),
+    new JsonString("d")
+));
 
 System.out.println(obj.toJson());
 
@@ -107,9 +104,16 @@ Too constraining!
 
 ---
 
+### FP polymorphism
+
+- Function composition
+- Dispatch on parameters
+
+---
+
 ### Protocols
 
-**A.K.A. Typeclasses**
+**open type system**
 
 ---
 
@@ -134,7 +138,8 @@ Too constraining!
 
 ```clojure
 (extend-type nil Json
-  (to-json [this] "null"))
+  (to-json [this]
+    "null"))
 ```
 
 ---

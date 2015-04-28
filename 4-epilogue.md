@@ -11,4 +11,3 @@
 ```clojure
 (questions? "Osvaldas Grigas" @ogrigas)
 ```
-

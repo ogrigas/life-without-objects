@@ -108,12 +108,13 @@ pageInjected.render(customerId);
 ### "Decorator" pattern
 
 ```clojure
-(defn with-timer [f]
+(defn with-logging [f]
   (fn [& args]
-    (println "Started" (System/nanoTime)
-    (apply f args)
-    (println "Completed" (System/nanoTime))))
+    (log/debug "Called with params" args)
+    (def [result (apply f args)]
+      (log/debug "Returned" result)
+      result)))
 
-(render-page (with-timer load-profile) customer-id)
+(render-page (with-logging load-profile) customer-id)
 ```
 
