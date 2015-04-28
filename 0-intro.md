@@ -11,11 +11,3 @@ Osvaldas Grigas | [@ogrigas](http://twitter.com/ogrigas)
 #### OOP Hangover
 
 ![hangover](img/hangover.jpg)
-
----
-
-### Coming up next
-
-- Design
-- Composition
-- Polymorphism

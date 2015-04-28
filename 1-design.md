@@ -189,15 +189,23 @@ Feelin' good now
 
 ---
 
+**Applying OO design principles<br/>
+eventually leads to...<br/>**
+
+**functional design**  <!-- .element class="fragment" -->
+
+---
+
 ### What's missing
 
 - Code organization
+- Encapsulation
 - Inheritance hierarchies
 - Polymorphism
 
 ---
 
-#### Missing code organization?
+#### No code organization?
 
 ```clojure
 (ns my.product.repository)
@@ -213,20 +221,21 @@ Feelin' good now
 (product-repo/find-by-id 42)
 ```
 
-```clojure
-(require '[my.product.repository :refer [find-by-id]])
+---
 
-(find-by-id 42)
-```
+#### No encapsulation?
+
+- Data is _not_ an object
+- Data is immutable
 
 ---
 
-#### Missing inheritance hierarchies?
+#### No inheritance hierarchies?
 
-**Really?**
+**Blimey! What a showstopper**
 
 ---
 
-#### Missing polymorphism?
+#### No polymorphism?
 
-Bare with me...
+We'll get there
