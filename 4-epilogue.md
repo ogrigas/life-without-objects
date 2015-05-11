@@ -4,7 +4,7 @@
 - Composition
 - Polymorphism
 
-**OOP &lt;-&gt; FP**
+**OOP &#8644; FP**
 
 ---
 
