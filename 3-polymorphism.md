@@ -13,19 +13,16 @@ I don't want to know.
 
 ---
 
-### Polymorphism
+### Basic FP polymorphism
 
-- **Subtype**
-- Parametric
-- Ad-hoc
+- All functions implement the "Strategy" pattern
 
 ---
 
 ### OO Polymorphism
 
-- Inheritance hierarchy
-- Interfaces
-- Dependency inversion
+- Interfaces / Subclasses
+- Dispatch on the type of first argument
 
 ---
 
@@ -73,7 +70,6 @@ public class JsonList implements JsonObj {
 
 ---
 
-
 ```java
 JsonObj obj = new JsonList(asList(
       new JsonString("a"),
@@ -104,16 +100,9 @@ Too constraining!
 
 ---
 
-### FP polymorphism
+### Clojure Protocols
 
-- Function composition
-- Dispatch on parameters
-
----
-
-### Protocols
-
-**open type system**
+**dispatch on the type of first argument**
 
 ---
 
@@ -158,43 +147,27 @@ Why stop there?
 
 ---
 
-### Multimethods
+### Clojure Multimethods
+
+**dispatch on anything!**
 
 ---
 
 ```clojure
 (defmulti greet :country)
 
-(defmethod greet "LT" [person]
-  (println "Labas," (:name person) ". Kaip sekasi?"))
+(defmethod greet "PL" [person]
+  (println "Dzień dobry," (:name person)))
 
 (defmethod greet "FR" [person]
   (println "Bonjour," (:name person) "!"))
 
 (defmethod greet :default [person]
-  (println "Hi," (:name person)))
+  (println "Hello," (:name person)))
 ```
 
 ```clojure
 (greet {:name "Jacques" :country "FR"})
 
 ;;=> Bonjour, Jacques !
-```
-
----
-
-```clojure
-(defmulti say (fn [text n] (even? n)))
-
-(defmethod say true [text n]
-  (println text n "is even"))
-
-(defmethod say false [text n]
-  (println text n "is odd"))
-```
-
-```clojure
-(say "Guess what?" 5)
-
-;;=> Guess what? 5 is odd
 ```

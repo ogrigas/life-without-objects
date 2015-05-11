@@ -4,9 +4,9 @@
 - Composition
 - Polymorphism
 
----
+**OOP &#8644; FP**
 
-**I'm probably over time already**
+---
 
 ```clojure
 (questions? "Osvaldas Grigas" @ogrigas)

@@ -1,4 +1,4 @@
-# Living w/o Objects
+# no Objects, no Classes, no Monads
 
 ### **Thinking in functions**
 

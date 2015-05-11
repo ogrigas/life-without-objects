@@ -10,12 +10,6 @@
 
 ---
 
-### Monolithic Design
-
-![monolith](img/monolith.jpg)
-
----
-
 ### OO Design 
 
 - Noun-oriented   <!-- .element: class="fragment" -->
@@ -190,7 +184,7 @@ Feelin' good now
 ---
 
 **Applying OO design principles<br/>
-eventually leads to...<br/>**
+often leads to...<br/>**
 
 **functional design**  <!-- .element class="fragment" -->
 
@@ -225,17 +219,17 @@ eventually leads to...<br/>**
 
 #### No encapsulation?
 
-- Data is _not_ an object
-- Data is immutable
+- Data is _not_ an object  <!-- .element: class="fragment" -->
+- Data is immutable        <!-- .element: class="fragment" -->
 
 ---
 
 #### No inheritance hierarchies?
 
-**Blimey! What a showstopper**
+**Who cares!**  <!-- .element: class="fragment" -->
 
 ---
 
 #### No polymorphism?
 
-We'll get there
+We'll get there  <!-- .element: class="fragment" -->

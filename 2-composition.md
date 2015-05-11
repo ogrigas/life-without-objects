@@ -12,7 +12,7 @@ Avoiding hard-coded dependencies
 
 ---
 
-### OO Composition
+### OO Dependencies
 
 ```java
 public class ProfilePage {
@@ -34,7 +34,7 @@ String html = page.render(repository, customerId);
 
 ---
 
-### FP Composition
+### FP Dependencies
 
 ```clojure
 (defn render-page [repository-fn customer-id]
@@ -52,7 +52,7 @@ String html = page.render(repository, customerId);
 
 ---
 
-### OO "Dependency Injection"
+### OO Composition
 
 ```java
 ProfilePage pageInjected = new ProfilePage(new Repository());
@@ -64,7 +64,7 @@ pageInjected.render(customerId);
 
 ---
 
-### FP "Dependency Injection"
+### Function closure
 
 ```clojure
 (def render-injected
@@ -90,12 +90,6 @@ pageInjected.render(customerId);
 ---
 
 ### "Adapter" pattern
-
-```clojure
-(defn parse-int [s] (Integer/parseInt s))
-
-(render-page (comp load-profile parse-int) customer-id)
-```
 
 ```clojure
 (defn to-view-model [profile] (...))
