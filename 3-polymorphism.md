@@ -13,11 +13,9 @@ I don't want to know.
 
 ---
 
-### Polymorphism
+### Basic FP polymorphism
 
-- **Subtype**
-- Parametric
-- Ad-hoc
+- All functions implement the "Strategy" pattern
 
 ---
 
@@ -99,13 +97,6 @@ System.out.println(obj.toJson());
 ![constrain](img/constrain.jpg)
 
 Too constraining!
-
----
-
-### FP polymorphism
-
-- Function composition
-- Dispatch on parameters
 
 ---
 
