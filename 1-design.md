@@ -2,25 +2,30 @@
 
 ---
 
-### Design
-
-| Before | After |
-| ------ | ----- |
-| ![before](img/design-before.jpg) | ![after](img/design-after.jpg) |
-
----
-
 ### Monolithic Design
 
 ![monolith](img/monolith.jpg)
 
 ---
 
+### Modular Design
+
+![monolith](img/lego-car.jpg)
+
+---
+
+### Design process
+
+| Before | After |
+| ------ | ----- |
+| ![monolith](img/monolith.jpg) <!-- .element width="380" height="360" --> | ![after](img/design-after.jpg) <!-- .element width="350" height="360" --> |
+
+---
+
 ### OO Design 
 
-- Noun-oriented   <!-- .element: class="fragment" -->
-- Verb-oriented   <!-- .element: class="fragment" -->
-- Domain-driven?  <!-- .element: class="fragment" -->
+- Noun-oriented
+- Verb-oriented
 
 ---
 
@@ -40,6 +45,10 @@
 
 ---
 
+**Domain-driven design?**
+
+---
+
 ### OO Design Principles
 
 - Single Responsibility
@@ -50,75 +59,112 @@
 
 ### Single Responsibility
 
+---
+
 ```java
 public class ZipDownloadService {
 
-    public List<File> downloadAndExtract(String location) { }
-
+    public List<File> downloadAndExtract(String location) {
+        ...
+    }
 }
 ```
 
 ---
 
-### Single Responsibility
-
 ```java
 public class FileDownloader {
 
-    public List<File> downloadFiles(String location) { ... }
-
+    public List<File> downloadFiles(String location) {
+        ...
+    }
 }
 ```
 
 ```java
 public class ZipExtractor {
 
-    public File extractZip(File archive) { ... }
-
+    public File extractZip(File archive) {
+        ...
+    }
 }
 ```
 
 ---
 
-### Or ... just functions
+Or ... just functions
 
 ```clojure
-(defn download-files [location] (...))
+(defn download-files [location]
+  (...))
 
-(defn extract-zip [archive] (...))
+(defn extract-zip [archive]
+  (...))
 ```
 
 ---
 
 ### Clojure
 
-<p><strong class="fragment" data-fragment-index="1">in a nutshell</strong></p>
+in a nutshell
 
-<p class="fragment" data-fragment-index="2">
-  <span class="fragment" data-fragment-index="3">(</span>
-  some-function
-  <span class="fragment fade-out" data-fragment-index="3">(</span>
-  arg1
-  <span class="fragment fade-out" data-fragment-index="4">,</span>
-  arg2
-  <span class="fragment fade-out" data-fragment-index="4">,</span>
-  arg3
-  )
-</p>
+```clojure
+  
+```
+
+---
+
+### Clojure
+
+in a nutshell
+
+```java
+ calculate(5, 2, 9)
+```
+
+---
+
+### Clojure
+
+in a nutshell
+
+```clojure
+(calculate 5, 2, 9)
+```
+
+---
+
+### Clojure
+
+in a nutshell
+
+```clojure
+(calculate 5 2 9)
+```
+
+---
+
+### Function definition
+
+```clojure
+(defn calculate [a b c] (+ a (* b c)))
+```
 
 ---
 
 ### Interface Segregation
 
+---
+
 ```csharp
 public class ProductCatalog
 {
-    public ProductId Save(Product product)
+    public void Save(Product product)
     {
         ...
     }
-    
-    public Product FindById(ProductId id)
+
+    public Product FindById(int productId)
     {
         ...
     }
@@ -127,21 +173,23 @@ public class ProductCatalog
 
 ---
 
-### Interface Segregation
-
 ```csharp
 public class ProductSaver
 {
-    public ProductId Save(Product product)
-    { ... }
+    public void Save(Product product)
+    {
+        ...
+    }
 }
 ```
 
 ```csharp
 public class ProductFinder
 {
-    public Product FindById(ProductId id)
-    { ... }
+    public Product FindById(int id)
+    {
+        ...
+    }
 }
 ```
 
@@ -153,21 +201,23 @@ Somethin' ain't right
 
 ---
 
-### Interface Segregation
-
 ```csharp
 public class ProductRepository
 {
-    public ProductId Save(Product product)
-    { ... }
+    public void Save(Product product)
+    {
+        ...
+    }
 }
 ```
 
 ```csharp
 public class ProductQuery
 {
-    public Product FindById(ProductId id)
-    { ... }
+    public Product FindById(int id)
+    {
+        ...
+    }
 }
 ```
 
@@ -179,63 +229,18 @@ Feelin' good now
 
 ---
 
-### Or ... just functions
+Or ... just functions
 
 ```clojure
-(defn save-product [product] (...))
+(defn save-product [product]
+  (...))
 
-(defn find-product-by-id [id] (...))
+(defn find-product-by-id [id]
+  (...))
 ```
 
 ---
 
 **Applying OO design principles<br/>
-eventually leads to...<br/>**
-
-**functional design**  <!-- .element class="fragment" -->
-
----
-
-### What's missing
-
-- Code organization
-- Encapsulation
-- Inheritance hierarchies
-- Polymorphism
-
----
-
-#### No code organization?
-
-```clojure
-(ns my.product.repository)
-
-(defn save [product] (...))
-
-(defn find-by-id [id] (...))
-```
-
-```clojure
-(require '[my.product.repository :as product-repo])
-
-(product-repo/find-by-id 42)
-```
-
----
-
-#### No encapsulation?
-
-- Data is _not_ an object
-- Data is immutable
-
----
-
-#### No inheritance hierarchies?
-
-**Blimey! What a showstopper**
-
----
-
-#### No polymorphism?
-
-We'll get there
+often leads to<br/>
+functional design**

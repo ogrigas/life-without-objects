@@ -12,7 +12,7 @@ Avoiding hard-coded dependencies
 
 ---
 
-### OO Composition
+### OO Dependencies
 
 ```java
 public class ProfilePage {
@@ -34,7 +34,7 @@ String html = page.render(repository, customerId);
 
 ---
 
-### FP Composition
+### FP Dependencies
 
 ```clojure
 (defn render-page [repository-fn customer-id]
@@ -42,17 +42,17 @@ String html = page.render(repository, customerId);
 ```
 
 ```clojure
-(defn load-profile [customer-id]
+(defn load-from-db [customer-id]
   (...))
 ```
 
 ```clojure
-(render-page load-profile customer-id)
+(render-page load-from-db customer-id)
 ```
 
 ---
 
-### OO "Dependency Injection"
+### OO Composition
 
 ```java
 ProfilePage pageInjected = new ProfilePage(new Repository());
@@ -64,11 +64,11 @@ pageInjected.render(customerId);
 
 ---
 
-### FP "Dependency Injection"
+### Function closure
 
 ```clojure
-(def render-injected
-  (fn [customer-id] (render-page load-profile customer-id)))
+(defn render-injected [customer-id]
+  (render-page load-from-db customer-id))
 ```
 
 ```clojure
@@ -80,7 +80,7 @@ pageInjected.render(customerId);
 ### Partial application
 
 ```clojure
-(def render-injected (partial render-page load-profile))
+(def render-injected (partial render-page load-from-db))
 ```
 
 ```clojure
@@ -92,15 +92,9 @@ pageInjected.render(customerId);
 ### "Adapter" pattern
 
 ```clojure
-(defn parse-int [s] (Integer/parseInt s))
-
-(render-page (comp load-profile parse-int) customer-id)
-```
-
-```clojure
 (defn to-view-model [profile] (...))
 
-(render-page (comp to-view-model load-profile) customer-id)
+(render-page (comp to-view-model load-from-db) customer-id)
 ```
 
 ---
@@ -108,13 +102,12 @@ pageInjected.render(customerId);
 ### "Decorator" pattern
 
 ```clojure
-(defn with-logging [f]
+(defn traceable [f]
   (fn [& args]
-    (log/debug "Called with params" args)
-    (def [result (apply f args)]
-      (log/debug "Returned" result)
+    (log/trace "Called with params" args)
+    (let [result (apply f args)]
+      (log/trace "Returned" result)
       result)))
 
-(render-page (with-logging load-profile) customer-id)
+(render-page (traceable load-from-db) customer-id)
 ```
-

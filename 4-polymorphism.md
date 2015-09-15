@@ -6,26 +6,16 @@
 
 ---
 
-### Polymorphism
+### Basic FP polymorphism
 
-I don't know.  
-I don't want to know.
-
----
-
-### Polymorphism
-
-- **Subtype**
-- Parametric
-- Ad-hoc
+All functions implement the "Strategy" pattern
 
 ---
 
 ### OO Polymorphism
 
-- Inheritance hierarchy
-- Interfaces
-- Dependency inversion
+- "Subtype Polymorphism"
+- Dispatch on the type of first argument
 
 ---
 
@@ -55,16 +45,16 @@ public class JsonString implements JsonObj {
 
 ```java
 public class JsonList implements JsonObj {
-    private final List<? extends JsonObj> list;
+    private final List<JsonObj> items;
     
-    public JsonString(List<? extends JsonObj> list) {
-        this.list = list;
+    public JsonString(JsonObj... items) {
+        this.items = asList(items);
     }
     
     public String toJson() {
         return "[" +
-            list.stream()
-                .map(JsonObj::toJson)
+            items.stream()
+                .map(item -> item.toJson())
                 .collect(joining(",")) +
             "]";
     }
@@ -73,16 +63,15 @@ public class JsonList implements JsonObj {
 
 ---
 
-
 ```java
-JsonObj obj = new JsonList(asList(
-      new JsonString("a"),
-    new JsonList(asList(
+JsonObj obj = new JsonList(
+    new JsonString("a"),
+    new JsonList(
         new JsonString("b"),
         new JsonString("c")
-    )),
+    ),
     new JsonString("d")
-));
+);
 
 System.out.println(obj.toJson());
 
@@ -93,8 +82,31 @@ System.out.println(obj.toJson());
 
 #### Limitations
 
-- Need wrapper types
-- Cannot extend existing types
+Subtyping is coupled to implementation
+
+&nbsp;
+
+&nbsp;
+
+---
+
+#### Limitations
+
+Subtyping is coupled to implementation
+
+... cannot extend existing types
+
+&nbsp;
+
+---
+
+#### Limitations
+
+Subtyping is coupled to implementation
+
+... cannot extend existing types
+
+... need wrapper classes
 
 ---
 
@@ -104,16 +116,9 @@ Too constraining!
 
 ---
 
-### FP polymorphism
+### Clojure Protocols
 
-- Function composition
-- Dispatch on parameters
-
----
-
-### Protocols
-
-**open type system**
+dispatch on the type of first argument
 
 ---
 
@@ -133,7 +138,7 @@ Too constraining!
 ```clojure
 (extend-type List Json
   (to-json [this]
-    (str "[" (->> this (map to-json) (string/join ",")) "]")))
+    (str "[" (string/join "," (map to-json this)) "]")))
 ```
 
 ```clojure
@@ -160,41 +165,25 @@ Why stop there?
 
 ### Multimethods
 
+dispatch on anything!
+
 ---
 
 ```clojure
 (defmulti greet :country)
 
-(defmethod greet "LT" [person]
-  (println "Labas," (:name person) ". Kaip sekasi?"))
+(defmethod greet "PL" [person]
+  (println "Dzień dobry," (:name person)))
 
 (defmethod greet "FR" [person]
   (println "Bonjour," (:name person) "!"))
 
 (defmethod greet :default [person]
-  (println "Hi," (:name person)))
+  (println "Hello," (:name person)))
 ```
 
 ```clojure
 (greet {:name "Jacques" :country "FR"})
 
 ;;=> Bonjour, Jacques !
-```
-
----
-
-```clojure
-(defmulti say (fn [text n] (even? n)))
-
-(defmethod say true [text n]
-  (println text n "is even"))
-
-(defmethod say false [text n]
-  (println text n "is odd"))
-```
-
-```clojure
-(say "Guess what?" 5)
-
-;;=> Guess what? 5 is odd
 ```
