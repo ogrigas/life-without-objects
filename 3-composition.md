@@ -89,6 +89,12 @@ pageInjected.render(customerId);
 
 ---
 
+**"Object is a collection of partially-applied functions."**
+
+- J.B. Rainsberger
+
+---
+
 ### "Adapter" pattern
 
 ```clojure
