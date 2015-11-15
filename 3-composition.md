@@ -17,19 +17,19 @@ Avoiding hard-coded dependencies
 ```java
 public class ProfilePage {
 
-    public String render(Repository repository, int customerId) {
-        return toHtml(repository.loadProfile(customerId));
+    String render(Repository repo, int customerId) {
+        return toHtml(repo.loadProfile(customerId));
     }
 }
 ```
 
 ```java
-Repository repository = new Repository();
+Repository repo = new Repository();
 ProfilePage page = new ProfilePage();
 ```
 
 ```java
-String html = page.render(repository, customerId);
+String html = page.render(repo, customerId);
 ```
 
 ---
@@ -55,11 +55,11 @@ String html = page.render(repository, customerId);
 ### OO Composition
 
 ```java
-ProfilePage pageInjected = new ProfilePage(new Repository());
+ProfilePage page = new ProfilePage(new Repository());
 ```
 
 ```java
-pageInjected.render(customerId);
+page.render(customerId);
 ```
 
 ---
@@ -67,8 +67,11 @@ pageInjected.render(customerId);
 ### Function closure
 
 ```clojure
-(defn render-injected [customer-id]
-  (render-page load-from-db customer-id))
+(defn inject [f arg1]
+  (fn [arg2] (f arg1 arg2)))
+
+(def render-injected
+  (inject render-page load-from-db))
 ```
 
 ```clojure
@@ -80,7 +83,8 @@ pageInjected.render(customerId);
 ### Partial application
 
 ```clojure
-(def render-injected (partial render-page load-from-db))
+(def render-injected
+  (partial render-page load-from-db))
 ```
 
 ```clojure
@@ -100,7 +104,7 @@ pageInjected.render(customerId);
 ```clojure
 (defn to-view-model [profile] (...))
 
-(render-page (comp to-view-model load-from-db) customer-id)
+(render-page (comp to-view-model load-from-db) id)
 ```
 
 ---
@@ -115,5 +119,5 @@ pageInjected.render(customerId);
       (log/trace "Returned" result)
       result)))
 
-(render-page (traceable load-from-db) customer-id)
+(render-page (traceable load-from-db) id)
 ```

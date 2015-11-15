@@ -64,7 +64,7 @@
 ```java
 public class ZipDownloadService {
 
-    public List<File> downloadAndExtract(String location) {
+    List<File> downloadAndExtract(String location) {
         ...
     }
 }
@@ -75,7 +75,7 @@ public class ZipDownloadService {
 ```java
 public class FileDownloader {
 
-    public List<File> downloadFiles(String location) {
+    List<File> downloadFiles(String location) {
         ...
     }
 }
@@ -84,7 +84,7 @@ public class FileDownloader {
 ```java
 public class ZipExtractor {
 
-    public File extractZip(File archive) {
+    File extractZip(File archive) {
         ...
     }
 }

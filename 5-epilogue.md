@@ -4,7 +4,13 @@
 - Composition
 - Polymorphism
 
-**OOP &#8644; FP**
+---
+
+## OOP &#8644; FP
+
+---
+
+![class](img/object.png)
 
 ---
 

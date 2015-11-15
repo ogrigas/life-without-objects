@@ -138,7 +138,7 @@ dispatch on the type of first argument
 ```clojure
 (extend-type List Json
   (to-json [this]
-    (str "[" (string/join "," (map to-json this)) "]")))
+    (str "[" (str/join "," (map to-json this)) "]")))
 ```
 
 ```clojure
