@@ -147,7 +147,8 @@ in a nutshell
 ### Function definition
 
 ```clojure
-(defn calculate [a b c] (+ a (* b c)))
+(defn calculate [a b c]
+  (+ a (* b c)))
 ```
 
 ---

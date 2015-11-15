@@ -6,16 +6,11 @@
 
 ---
 
-### Basic FP polymorphism
-
-All functions implement the "Strategy" pattern
-
----
-
 ### OO Polymorphism
 
-- "Subtype Polymorphism"
-- Dispatch on the type of first argument
+_"Subtype Polymorphism"_
+
+(dispatch on the type of first argument)
 
 ---
 
@@ -52,11 +47,9 @@ public class JsonList implements JsonObj {
     }
     
     public String toJson() {
-        return "[" +
-            items.stream()
-                .map(item -> item.toJson())
-                .collect(joining(",")) +
-            "]";
+        return "[" + items.stream()
+            .map(item -> item.toJson())
+            .collect(joining(",")) + "]";
     }
 }
 ```

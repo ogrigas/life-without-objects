@@ -77,17 +77,6 @@
 ```
 
 ---
-
-```clojure
-(defentity person)
-
-(select person
-  (fields :name :age :email)
-  (where {:nationalId "38211109999"
-          :country "LT"}))
-```
-
----
 <p style="font-size: 0.55em">
 append-child array-map assoc 
 associative? assoc-in bean bigdec bigint biginteger bit-and 
@@ -151,5 +140,3 @@ just don't
 ---
 
 #### Composition &amp; Polymorphism
-
-&nbsp;

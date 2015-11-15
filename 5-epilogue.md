@@ -1,14 +1,4 @@
-### Conclusion
-
-- Design
-- Composition
-- Polymorphism
-
----
-
-## OOP &#8644; FP
-
----
+### the takeaway
 
 ![class](img/object.png)
 

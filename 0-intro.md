@@ -1,8 +1,10 @@
 &nbsp;
 
-# OOP &#8594; Functional &nbsp;Design
+# &nbsp;Life w/o Objects  <!-- .element: style="color: #42affa" -->
 
-**(with Clojure)** <!-- .element style="font-size: 1.4em" -->
+## &nbsp;OOP &#8594; Functional &nbsp;Design&nbsp;
+
+#### &nbsp;with Clojure  <!-- .element: style="color: #d0f0ff" -->
 
 &nbsp;
 

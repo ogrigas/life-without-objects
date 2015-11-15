@@ -48,7 +48,14 @@ String html = page.render(repo, customerId);
 
 ```clojure
 (render-page load-from-db customer-id)
+
 ```
+
+---
+
+### Basic FP polymorphism
+
+All functions implement the "Strategy" pattern
 
 ---
 
@@ -69,13 +76,15 @@ page.render(customerId);
 ```clojure
 (defn inject [f arg1]
   (fn [arg2] (f arg1 arg2)))
+```
 
-(def render-injected
+```clojure
+(def render-from-db
   (inject render-page load-from-db))
 ```
 
 ```clojure
-(render-injected customer-id)
+(render-from-db customer-id)
 ```
 
 ---
@@ -83,19 +92,19 @@ page.render(customerId);
 ### Partial application
 
 ```clojure
-(def render-injected
+(def render-from-db
   (partial render-page load-from-db))
 ```
 
 ```clojure
-(render-injected customer-id)
+(render-from-db customer-id)
 ```
 
 ---
 
 **"Object is a collection of partially-applied functions."**
 
-- J.B. Rainsberger
+( _J.B. Rainsberger_ )
 
 ---
 
@@ -105,19 +114,4 @@ page.render(customerId);
 (defn to-view-model [profile] (...))
 
 (render-page (comp to-view-model load-from-db) id)
-```
-
----
-
-### "Decorator" pattern
-
-```clojure
-(defn traceable [f]
-  (fn [& args]
-    (log/trace "Called with params" args)
-    (let [result (apply f args)]
-      (log/trace "Returned" result)
-      result)))
-
-(render-page (traceable load-from-db) id)
 ```
