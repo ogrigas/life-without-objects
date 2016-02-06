@@ -6,23 +6,11 @@
 
 ---
 
-### Polymorphism
-
-I don't know.  
-I don't want to know.
-
----
-
-### Basic FP polymorphism
-
-- All functions implement the "Strategy" pattern
-
----
-
 ### OO Polymorphism
 
-- Interfaces / Subclasses
-- Dispatch on the type of first argument
+_"Subtype Polymorphism"_
+
+(dispatch on the type of first argument)
 
 ---
 
@@ -52,18 +40,16 @@ public class JsonString implements JsonObj {
 
 ```java
 public class JsonList implements JsonObj {
-    private final List<? extends JsonObj> list;
+    private final List<JsonObj> items;
     
-    public JsonString(List<? extends JsonObj> list) {
-        this.list = list;
+    public JsonString(JsonObj... items) {
+        this.items = asList(items);
     }
     
     public String toJson() {
-        return "[" +
-            list.stream()
-                .map(JsonObj::toJson)
-                .collect(joining(",")) +
-            "]";
+        return "[" + items.stream()
+            .map(item -> item.toJson())
+            .collect(joining(",")) + "]";
     }
 }
 ```
@@ -71,14 +57,14 @@ public class JsonList implements JsonObj {
 ---
 
 ```java
-JsonObj obj = new JsonList(asList(
-      new JsonString("a"),
-    new JsonList(asList(
+JsonObj obj = new JsonList(
+    new JsonString("a"),
+    new JsonList(
         new JsonString("b"),
         new JsonString("c")
-    )),
+    ),
     new JsonString("d")
-));
+);
 
 System.out.println(obj.toJson());
 
@@ -89,8 +75,31 @@ System.out.println(obj.toJson());
 
 #### Limitations
 
-- Need wrapper types
-- Cannot extend existing types
+Subtyping is coupled to implementation
+
+&nbsp;
+
+&nbsp;
+
+---
+
+#### Limitations
+
+Subtyping is coupled to implementation
+
+... cannot extend existing types
+
+&nbsp;
+
+---
+
+#### Limitations
+
+Subtyping is coupled to implementation
+
+... cannot extend existing types
+
+... need wrapper classes
 
 ---
 
@@ -102,7 +111,7 @@ Too constraining!
 
 ### Clojure Protocols
 
-**dispatch on the type of first argument**
+dispatch on the type of first argument
 
 ---
 
@@ -122,7 +131,7 @@ Too constraining!
 ```clojure
 (extend-type List Json
   (to-json [this]
-    (str "[" (->> this (map to-json) (string/join ",")) "]")))
+    (str "[" (str/join "," (map to-json this)) "]")))
 ```
 
 ```clojure
@@ -150,6 +159,8 @@ Why stop there?
 ### Clojure Multimethods
 
 **dispatch on anything!**
+
+dispatch on anything!
 
 ---
 
