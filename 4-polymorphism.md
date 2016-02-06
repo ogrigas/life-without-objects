@@ -156,7 +156,9 @@ Why stop there?
 
 ---
 
-### Multimethods
+### Clojure Multimethods
+
+**dispatch on anything!**
 
 dispatch on anything!
 
