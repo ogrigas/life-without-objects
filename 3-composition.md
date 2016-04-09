@@ -115,3 +115,16 @@ page.render(customerId);
 
 (render-page (comp to-view-model load-from-db) id)
 ```
+
+---
+
+### "Decorator" pattern
+
+```clojure
+(defn traceable [f]
+  (fn [& args]
+    (log/trace "Called with params:" args)
+    (apply f args)))
+
+(render-page (traceable load-from-db) id)
+```
