@@ -158,8 +158,6 @@ Why stop there?
 
 ### Clojure Multimethods
 
-**dispatch on anything!**
-
 dispatch on anything!
 
 ---
