@@ -1,6 +1,16 @@
 ### the takeaway
 
-![class](img/object.png)
+![](img/wollmilchsau.png)
+
+Eierlegende Wollmilchsau
+
+---
+
+### the takeaway
+
+![](img/object.png)
+
+Object
 
 ---
 
