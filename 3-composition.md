@@ -6,13 +6,14 @@
 
 ---
 
-### Composition
+## Dependency inversion
 
-Avoiding hard-coded dependencies
+- Good for decoupling
+- Good for isolated testing
 
 ---
 
-### OO Dependencies
+### OO dependencies
 
 ```java
 public class ProfilePage {
@@ -24,7 +25,7 @@ public class ProfilePage {
 ```
 
 ```java
-Repository repo = new Repository();
+Repository repo = new SqlRepository();
 ProfilePage page = new ProfilePage();
 ```
 
@@ -34,7 +35,7 @@ String html = page.render(repo, customerId);
 
 ---
 
-### FP Dependencies
+### FP dependencies
 
 ```clojure
 (defn render-page [repository-fn customer-id]
@@ -42,12 +43,12 @@ String html = page.render(repo, customerId);
 ```
 
 ```clojure
-(defn load-from-db [customer-id]
+(defn load-from-sql [customer-id]
   (...))
 ```
 
 ```clojure
-(render-page load-from-db customer-id)
+(render-page load-from-sql customer-id)
 
 ```
 
@@ -59,10 +60,11 @@ All functions implement the "Strategy" pattern
 
 ---
 
-### OO Composition
+### OO composition
 
 ```java
-ProfilePage page = new ProfilePage(new Repository());
+Repository repo = new SqlRepository();
+ProfilePage page = new ProfilePage(repo);
 ```
 
 ```java
@@ -80,7 +82,7 @@ page.render(customerId);
 
 ```clojure
 (def render-from-db
-  (inject render-page load-from-db))
+  (inject render-page load-from-sql))
 ```
 
 ```clojure
@@ -93,7 +95,7 @@ page.render(customerId);
 
 ```clojure
 (def render-from-db
-  (partial render-page load-from-db))
+  (partial render-page load-from-sql))
 ```
 
 ```clojure
@@ -108,12 +110,114 @@ page.render(customerId);
 
 ---
 
+"Class" as a namespace
+
+```clojure
+(def Account
+  {'deposit  (fn [this amount]
+               (update this :balance + amount))
+
+   'withdraw (fn [this amount]
+               (if (< amount (this :balance))
+                 (update this :balance - amount)
+                 this))})
+```
+
+```clojure
+(def state0 {:balance 0})
+(def state1 ((Account 'deposit)  state0 100))
+(def state2 ((Account 'withdraw) state1 30))
+(def state3 ((Account 'withdraw) state2 20))
+```
+
+---
+
+"Constructor" to partially apply _state_ 
+
+```clojure
+(defn new-object [clazz initial-state]
+  ..........
+    ..........
+      ..........)
+```
+
+```clojure
+(def acc (new-object Account {:balance 0}))
+(acc 'deposit 100)
+(acc 'withdraw 30)
+(acc 'withdraw 20)
+```
+
+---
+
+"Constructor" to partially apply _state_
+
+```clojure
+(defn new-object [clazz initial-state]
+  (let [state (atom initial-state)]
+    ..........
+      ..........))
+```
+
+```clojure
+(def acc (new-object Account {:balance 0}))
+(acc 'deposit 100)
+(acc 'withdraw 30)
+(acc 'withdraw 20)
+```
+
+---
+
+"Constructor" to partially apply _state_
+
+```clojure
+(defn new-object [clazz initial-state]
+  (let [state (atom initial-state)]
+    (fn [method & args]
+      ..........)))
+```
+
+```clojure
+(def acc (new-object Account {:balance 0}))
+(acc 'deposit 100)
+(acc 'withdraw 30)
+(acc 'withdraw 20)
+```
+
+---
+
+"Constructor" to partially apply _state_
+
+```clojure
+(defn new-object [clazz initial-state]
+  (let [state (atom initial-state)]
+    (fn [method & args]
+      (apply swap! state (clazz method) args))))
+```
+
+```clojure
+(def acc (new-object Account {:balance 0}))
+(acc 'deposit 100)
+(acc 'withdraw 30)
+(acc 'withdraw 20)
+```
+
+---
+
+## Structural patterns
+
+- Adapter
+- Decorator
+- ...
+
+---
+
 ### "Adapter" pattern
 
 ```clojure
 (defn to-view-model [profile] (...))
 
-(render-page (comp to-view-model load-from-db) id)
+(render-page (comp to-view-model load-from-sql) id)
 ```
 
 ---
@@ -126,5 +230,5 @@ page.render(customerId);
     (log/trace "Called with params:" args)
     (apply f args)))
 
-(render-page (traceable load-from-db) id)
+(render-page (traceable load-from-sql) id)
 ```
