@@ -6,8 +6,9 @@
 
 - Code organization
 - Encapsulation
-- Inheritance hierarchies
-- Composition &amp; Polymorphism
+- Inheritance
+- Composition
+- Polymorphism
 
 ---
 
@@ -127,13 +128,13 @@ Process / Entity / State Machine
 
 ---
 
-#### Inheritance hierarchies
+#### Inheritance
 
 &nbsp;
 
 ---
 
-#### Inheritance hierarchies
+#### Inheritance
 
 just don't
 
