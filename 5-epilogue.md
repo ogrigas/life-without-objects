@@ -1,6 +1,6 @@
 ### the takeaway
 
-![](img/wollmilchsau.png)
+![wollmilchsau](img/wollmilchsau.png)
 
 Eierlegende Wollmilchsau
 
@@ -8,7 +8,7 @@ Eierlegende Wollmilchsau
 
 ### the takeaway
 
-![](img/object.png)
+![object](img/object.png)
 
 Object
 
