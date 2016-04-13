@@ -5,14 +5,15 @@
 ### What's missing
 
 - Code organization
-- Encapsulation
 - Inheritance
+- Encapsulation
 - Composition
 - Polymorphism
+- State management
 
 ---
 
-#### Code organization
+## Code organization
 
 ---
 
@@ -35,18 +36,30 @@
 
 ---
 
-#### Encapsulation
+## Inheritance
+
+&nbsp;
 
 ---
 
-#### Encapsulation
+## Inheritance
+
+just don't
+
+---
+
+## Encapsulation
+
+---
+
+### Encapsulation
 
 - Data is _not_ an object
 - &nbsp;
 
 ---
 
-#### Encapsulation
+### Encapsulation
 
 - Data is _not_ an object
 - Data is immutable
@@ -119,25 +132,3 @@ unchecked-subtract union unsigned-bit-shift-right up update
 update-in upper-case val vals vec vector vector? vector-of 
 vector-zip walk when-first xml-seq xml-zip zero? zipmap
 </p>
-
----
-
-![state-machine](img/state-machine.png) <!-- .element class="plain" height="360" -->
-
-Process / Entity / State Machine
-
----
-
-#### Inheritance
-
-&nbsp;
-
----
-
-#### Inheritance
-
-just don't
-
----
-
-#### Composition &amp; Polymorphism
