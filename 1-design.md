@@ -45,7 +45,11 @@
 
 ---
 
-**Domain-driven design?**
+**Domain-driven Design?**
+
+&nbsp;
+
+_"As a teller, I want to transfer funds between accounts."_
 
 ---
 
