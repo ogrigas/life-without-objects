@@ -123,7 +123,7 @@ in a nutshell
 in a nutshell
 
 ```java
- calculate(5, 2, 9)
+ calculate(5,2,9)
 ```
 
 ---
@@ -133,7 +133,7 @@ in a nutshell
 in a nutshell
 
 ```clojure
-(calculate 5, 2, 9)
+(calculate 5,2,9)
 ```
 
 ---
