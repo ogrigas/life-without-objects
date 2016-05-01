@@ -22,9 +22,7 @@
 
 ---
 
-![hybrid](img/hybrid.png) <!-- .element: class="plain" -->
-
-**"hybrid" languages**
+![learning-curve](img/learning-curve.png) <!-- .element: class="plain" -->
 
 ---
 
@@ -34,4 +32,6 @@
 
 ---
 
-![monad](img/monad.jpg) <!-- .element: height="360" -->
+![hybrid](img/hybrid.png) <!-- .element: class="plain" -->
+
+**"hybrid" languages**
